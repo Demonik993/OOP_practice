@@ -65,29 +65,54 @@ DATA CAR 2: 'Mercedes' going at 95 km/h
 
 GOOD LUCK 😀
 */
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-const bmw = new Car('BMW', 120);
-const mercedes = new Car('Mercedes', 95);
+// const bmw = new Car('BMW', 120);
+// const mercedes = new Car('Mercedes', 95);
 
-Car.prototype.accelerate = function () {
-  this.speed += 10;
-  console.log(this.make + ' going at ' + this.speed + ' km/h');
-};
-Car.prototype.break = function () {
-  this.speed -= 5;
-  console.log(this.make + ' going at ' + this.speed + ' km/h');
-};
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   console.log(this.make + ' going at ' + this.speed + ' km/h');
+// };
+// Car.prototype.break = function () {
+//   this.speed -= 5;
+//   console.log(this.make + ' going at ' + this.speed + ' km/h');
+// };
 
-bmw.accelerate();
-mercedes.accelerate();
-mercedes.accelerate();
-mercedes.accelerate();
-mercedes.accelerate();
-bmw.break();
-bmw.break();
-bmw.break();
-bmw.break();
+// bmw.accelerate();
+// mercedes.accelerate();
+// mercedes.accelerate();
+// mercedes.accelerate();
+// mercedes.accelerate();
+// bmw.break();
+// bmw.break();
+// bmw.break();
+// bmw.break();
+
+//ES6 CLASSES
+
+class Person {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  //Methods added to .prototype!!
+  calcAge() {
+    console.log(new Date().getFullYear() - this.birthYear);
+  }
+  greet() {
+    console.log(`Hello ${this.firstName}!`);
+  }
+}
+const john = new Person('Johnatan', 1989);
+john.calcAge(); // 35
+john.greet();
+
+// 1. Classes are not Hoisted -- have to be first declared;
+// 2. Classes are first class citizens;
+// 3. Classes are executed in strict mode
+
+console.log(john.__proto__.__proto__);
