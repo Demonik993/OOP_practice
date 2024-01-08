@@ -38,3 +38,12 @@ Person.prototype.species = 'Homo sapiens';
 console.log(jan.species); // Homo sapiens
 console.log(adam.hasOwnProperty('firstName')); // true
 console.log(adam.hasOwnProperty('species')); //false
+console.log(jan.__proto__.__proto__);
+const arr = [1, 2, 2, 3, 3, 4, 5];
+console.log(arr.__proto__);
+console.log(arr.__proto__.__proto__);
+
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+console.log(arr.unique()); //(5) [1, 2, 3, 4, 5]
