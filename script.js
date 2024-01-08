@@ -17,4 +17,24 @@ const jan = new Person('Jan', 1939);
 const dom = new Person('Dom', 1993);
 const adam = new Person('Adam', 0);
 console.log(jan, dom, adam);
-console.log(jan instanceof Person);
+const john = { name: 'John', surname: 'Smith' };
+// console.log(jan instanceof Person);
+
+//PROTOTYPE
+Person.prototype.calcAge = function () {
+  console.log(new Date().getFullYear() - this.birthDate);
+};
+adam.calcAge();
+jan.calcAge();
+dom.calcAge();
+
+console.log(jan.__proto__); // {calcAge: ƒ, constructor: ƒ}calcAge: ƒ ()constructor: ƒ (firstName, birthDate)[[Prototype]]: Object
+console.log(Person.prototype.isPrototypeOf(jan));
+console.log(Person.prototype.isPrototypeOf(adam));
+console.log(Person.prototype.isPrototypeOf(john));
+console.log(Person.prototype.isPrototypeOf(Person));
+
+Person.prototype.species = 'Homo sapiens';
+console.log(jan.species); // Homo sapiens
+console.log(adam.hasOwnProperty('firstName')); // true
+console.log(adam.hasOwnProperty('species')); //false
