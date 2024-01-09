@@ -94,34 +94,34 @@ GOOD LUCK 😀
 
 //ES6 CLASSES
 
-class Person {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
-  //Methods added to .prototype!!
-  calcAge() {
-    console.log(new Date().getFullYear() - this.birthYear);
-  }
-  greet() {
-    console.log(`Hello ${this.fullName}!`);
-  }
-  get age() {
-    return new Date().getFullYear() - this.birthYear;
-  }
-  set fullName(name) {
-    if (name.includes(' ')) this._fullName = name;
-    else alert('We need full name!');
-  }
-  get fullName() {
-    return this._fullName;
-  }
-  static hey() {
-    console.log('Hello world ✋!');
-  }
-}
-const john = new Person('Johnatan Adams', 1989);
-// john.calcAge(); // 35
+// class Person {
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
+//   //Methods added to .prototype!!
+//   calcAge() {
+//     console.log(new Date().getFullYear() - this.birthYear);
+//   }
+//   greet() {
+//     console.log(`Hello ${this.fullName}!`);
+//   }
+//   get age() {
+//     return new Date().getFullYear() - this.birthYear;
+//   }
+//   set fullName(name) {
+//     if (name.includes(' ')) this._fullName = name;
+//     else alert('We need full name!');
+//   }
+//   get fullName() {
+//     return this._fullName;
+//   }
+//   static hey() {
+//     console.log('Hello world ✋!');
+//   }
+// }
+// const john = new Person('Johnatan Adams', 1989);
+// // john.calcAge(); // 35
 // john.greet();
 
 // // 1. Classes are not Hoisted -- have to be first declared;
@@ -131,42 +131,88 @@ const john = new Person('Johnatan Adams', 1989);
 // console.log(john.__proto__.__proto__);
 
 // SETTERS & GETTERS
-const account = {
-  owner: 'Dom',
-  movements: [100, 1000, -200, 200, -500, 100, 50],
-  get latest() {
-    return this.movements.slice(-1).pop();
-  },
-  set latest(mov) {
-    this.movements.push(mov);
-  },
-};
-console.log(account.latest);
+// const account = {
+//   owner: 'Dom',
+//   movements: [100, 1000, -200, 200, -500, 100, 50],
+//   get latest() {
+//     return this.movements.slice(-1).pop();
+//   },
+//   set latest(mov) {
+//     this.movements.push(mov);
+//   },
+// };
+// console.log(account.latest);
 
-account.latest = -200;
-console.log(account.movements);
-// line 109
-console.log(john.age);
-const adam = new Person('Adam Kowalksi', 1965);
-console.log(adam.fullName);
+// account.latest = -200;
+// console.log(account.movements);
+// // line 109
+// console.log(john.age);
+// const adam = new Person('Adam Kowalksi', 1965);
+// console.log(adam.fullName);
 
-Person.hey();
+// Person.hey();
 
-// OBJECT CREATE
-const PersonProto = {
-  calcAge() {
-    console.log(new Date().getFullYear() - this.birthYear);
-  },
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
-const janusz = Object.create(PersonProto);
-janusz.name = 'Janusz';
-janusz.birthYear = 1954;
-janusz.calcAge();
-const sarah = Object.create(PersonProto);
-sarah.init('Sarah', 1995);
-console.log(sarah);
-sarah.calcAge();
+// // OBJECT CREATE
+// const PersonProto = {
+//   calcAge() {
+//     console.log(new Date().getFullYear() - this.birthYear);
+//   },
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
+// const janusz = Object.create(PersonProto);
+// janusz.name = 'Janusz';
+// janusz.birthYear = 1954;
+// janusz.calcAge();
+// const sarah = Object.create(PersonProto);
+// sarah.init('Sarah', 1995);
+// console.log(sarah);
+// sarah.calcAge();
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+1. Re-create challenge 1, but this time using an ES6 class;
+2. Add a getter called 'speedUS' which returns the current speed in mi/h (divide by 1.6);
+3. Add a setter called 'speedUS' which sets the current speed in mi/h (but converts it to km/h 
+before storing the value, by multiplying the input by 1.6);
+4. Create a new car and experiment with the accelerate and brake methods, and with the getter and setter.
+
+DATA CAR 1: 'Ford' going at 120 km/h
+
+GOOD LUCK 😀
+*/
+
+// class Car {
+//   constructor(make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+//   }
+//   get speedUS() {
+//     return this.speed / 1.6;
+//   }
+//   set speedUS(speed) {
+//     this.speed = speed * 1.6;
+//   }
+//   accelerate() {
+//     this.speed += 10;
+//     console.log(this.make + ' going at ' + this.speed + ' km/h');
+//   }
+//   break() {
+//     this.speed -= 5;
+//     console.log(this.make + ' going at ' + this.speed + ' km/h');
+//   }
+// }
+// const bmw = new Car('BMW', 125);
+// console.log(bmw);
+// const ford = new Car('Ford', 120);
+// console.log(ford.speedUS);
+// ford.speedUS = 90;
+// console.log(ford.speed);
+// console.log(ford.speedUS);
+// ford.accelerate();
+// ford.accelerate();
+// ford.break();
