@@ -151,3 +151,22 @@ const adam = new Person('Adam Kowalksi', 1965);
 console.log(adam.fullName);
 
 Person.hey();
+
+// OBJECT CREATE
+const PersonProto = {
+  calcAge() {
+    console.log(new Date().getFullYear() - this.birthYear);
+  },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+const janusz = Object.create(PersonProto);
+janusz.name = 'Janusz';
+janusz.birthYear = 1954;
+janusz.calcAge();
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1995);
+console.log(sarah);
+sarah.calcAge();
