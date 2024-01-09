@@ -95,8 +95,8 @@ GOOD LUCK 😀
 //ES6 CLASSES
 
 class Person {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
   //Methods added to .prototype!!
@@ -104,15 +104,45 @@ class Person {
     console.log(new Date().getFullYear() - this.birthYear);
   }
   greet() {
-    console.log(`Hello ${this.firstName}!`);
+    console.log(`Hello ${this.fullName}!`);
+  }
+  get age() {
+    return new Date().getFullYear() - this.birthYear;
+  }
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert('We need full name!');
+  }
+  get fullName() {
+    return this._fullName;
   }
 }
-const john = new Person('Johnatan', 1989);
-john.calcAge(); // 35
-john.greet();
+const john = new Person('Johnatan Adams', 1989);
+// john.calcAge(); // 35
+// john.greet();
 
-// 1. Classes are not Hoisted -- have to be first declared;
-// 2. Classes are first class citizens;
-// 3. Classes are executed in strict mode
+// // 1. Classes are not Hoisted -- have to be first declared;
+// // 2. Classes are first class citizens;
+// // 3. Classes are executed in strict mode
 
-console.log(john.__proto__.__proto__);
+// console.log(john.__proto__.__proto__);
+
+// SETTERS & GETTERS
+const account = {
+  owner: 'Dom',
+  movements: [100, 1000, -200, 200, -500, 100, 50],
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+console.log(account.latest);
+
+account.latest = -200;
+console.log(account.movements);
+// line 109
+console.log(john.age);
+const adam = new Person('Adam Kowalksi', 1965);
+console.log(adam.fullName);
