@@ -116,6 +116,9 @@ class Person {
   get fullName() {
     return this._fullName;
   }
+  static hey() {
+    console.log('Hello world ✋!');
+  }
 }
 const john = new Person('Johnatan Adams', 1989);
 // john.calcAge(); // 35
@@ -146,3 +149,5 @@ console.log(account.movements);
 console.log(john.age);
 const adam = new Person('Adam Kowalksi', 1965);
 console.log(adam.fullName);
+
+Person.hey();
