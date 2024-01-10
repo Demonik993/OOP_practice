@@ -120,6 +120,7 @@ GOOD LUCK 😀
 //     console.log('Hello world ✋!');
 //   }
 // }
+
 // const john = new Person('Johnatan Adams', 1989);
 // // john.calcAge(); // 35
 // john.greet();
@@ -258,51 +259,99 @@ DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
 
 GOOD LUCK 😀
 */
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-const bmw = new Car('BMW', 120);
-const mercedes = new Car('Mercedes', 95);
+// const bmw = new Car('BMW', 120);
+// const mercedes = new Car('Mercedes', 95);
 
-Car.prototype.accelerate = function () {
-  this.speed += 10;
-  console.log(this.make + ' going at ' + this.speed + ' km/h');
-};
-Car.prototype.break = function () {
-  this.speed -= 5;
-  console.log(this.make + ' going at ' + this.speed + ' km/h');
-};
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   console.log(this.make + ' going at ' + this.speed + ' km/h');
+// };
+// Car.prototype.break = function () {
+//   this.speed -= 5;
+//   console.log(this.make + ' going at ' + this.speed + ' km/h');
+// };
 
-const EV = function (make, speed, charge) {
-  Car.call(this, make, speed);
-  this.charge = charge;
-};
-EV.prototype = Object.create(Car.prototype);
-EV.prototype.constructor = EV;
-EV.prototype.chargeBattery = function (chargeTo) {
-  this.charge = chargeTo;
-};
-const tesla = new EV('Tesla', 120, 23);
-console.log(tesla.__proto__);
-EV.prototype.accelerate = function () {
-  this.speed += 20;
-  this.charge -= 1;
-  console.log(
-    this.make +
-      ' going at ' +
-      this.speed +
-      ' km/h with a charge of ' +
-      this.charge +
-      '%'
-  );
-};
-console.log(tesla);
-tesla.accelerate();
-tesla.accelerate();
-tesla.accelerate();
-tesla.break();
-bmw.accelerate();
-tesla.chargeBattery(90);
-console.log(tesla);
+// const EV = function (make, speed, charge) {
+//   Car.call(this, make, speed);
+//   this.charge = charge;
+// };
+// EV.prototype = Object.create(Car.prototype);
+// EV.prototype.constructor = EV;
+// EV.prototype.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+// };
+// const tesla = new EV('Tesla', 120, 23);
+// console.log(tesla.__proto__);
+// EV.prototype.accelerate = function () {
+//   this.speed += 20;
+//   this.charge -= 1;
+//   console.log(
+//     this.make +
+//       ' going at ' +
+//       this.speed +
+//       ' km/h with a charge of ' +
+//       this.charge +
+//       '%'
+//   );
+// };
+// console.log(tesla);
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.break();
+// bmw.accelerate();
+// tesla.chargeBattery(90);
+// console.log(tesla);
+
+// Inheritance of classes
+//parent
+class Person {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  //Methods added to .prototype!!
+  calcAge() {
+    console.log(new Date().getFullYear() - this.birthYear);
+  }
+  greet() {
+    console.log(`Hello ${this.fullName}!`);
+  }
+  get age() {
+    return new Date().getFullYear() - this.birthYear;
+  }
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert('We need full name!');
+  }
+  get fullName() {
+    return this._fullName;
+  }
+  static hey() {
+    console.log('Hello world ✋!');
+  }
+}
+//child
+class Student extends Person {
+  constructor(fullName, birthYear, course) {
+    // this comes always first:
+    super(fullName, birthYear); //arguments of parent constructor
+    this.course = course;
+  }
+  introduce() {
+    console.log(`Hi, I am ${this.fullName} and I study ${this.course}`);
+  }
+  calcAge() {
+    console.log(`I am ${this.age}, however I fill like ${this.age - 5}`);
+  }
+}
+const martha = new Student('Martha Jones', 2002, 'Computer science');
+martha.introduce();
+martha.fullName = 'Martha Jones Smith';
+console.log(martha.fullName);
+martha.calcAge();
