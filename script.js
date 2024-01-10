@@ -310,73 +310,122 @@ GOOD LUCK 😀
 
 // Inheritance of classes
 //parent
-class Person {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
+// class Person {
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
+//   //Methods added to .prototype!!
+//   calcAge() {
+//     console.log(new Date().getFullYear() - this.birthYear);
+//   }
+//   greet() {
+//     console.log(`Hello ${this.fullName}!`);
+//   }
+//   get age() {
+//     return new Date().getFullYear() - this.birthYear;
+//   }
+//   set fullName(name) {
+//     if (name.includes(' ')) this._fullName = name;
+//     else alert('We need full name!');
+//   }
+//   get fullName() {
+//     return this._fullName;
+//   }
+//   static hey() {
+//     console.log('Hello world ✋!');
+//   }
+// }
+// //child
+// class Student extends Person {
+//   constructor(fullName, birthYear, course) {
+//     // this comes always first:
+//     super(fullName, birthYear); //arguments of parent constructor
+//     this.course = course;
+//   }
+//   introduce() {
+//     console.log(`Hi, I am ${this.fullName} and I study ${this.course}`);
+//   }
+//   calcAge() {
+//     console.log(`I am ${this.age}, however I fill like ${this.age - 5}`);
+//   }
+// }
+// const martha = new Student('Martha Jones', 2002, 'Computer science');
+// martha.introduce();
+// martha.fullName = 'Martha Jones Smith';
+// console.log(martha.fullName);
+// martha.calcAge();
+
+// //inheritance Object.create
+
+// const PersonProto = {
+//   calcAge() {
+//     console.log(new Date().getFullYear() - this.birthYear);
+//   },
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
+// const StudentProto = Object.create(PersonProto);
+// StudentProto.init = function (firstName, birthYear, course) {
+//   PersonProto.init.call(this, firstName, birthYear);
+//   this.course = course;
+// };
+// const jay = Object.create(StudentProto);
+// jay.init('Jay', 1986, 'Mathematics');
+// console.log(jay);
+// jay.calcAge();
+// jay.introduce = function () {
+//   console.log(`Hi, I am ${this.firstName} and I study ${this.course}`);
+// };
+// jay.introduce();
+
+//Encapsulation: Protected Properties and Methods
+class Account {
+  // Public fields (instances)
+  locale = navigator.language;
+  //Private fields
+  #movements = [];
+  #pin;
+  constructor(name, currency, pin) {
+    this.name = name;
+    this.currency = currency;
+    // this.locale = navigator.language;
+    //protected property
+    this._pin = pin;
+    // this._movements = [];
+
+    console.log(`Hi, ${this.name}. Thank you for opening the account!`);
   }
-  //Methods added to .prototype!!
-  calcAge() {
-    console.log(new Date().getFullYear() - this.birthYear);
+  //Public methods
+  getMovements() {
+    return this.#movements;
   }
-  greet() {
-    console.log(`Hello ${this.fullName}!`);
+  deposit(val) {
+    this.#movements.push(val);
   }
-  get age() {
-    return new Date().getFullYear() - this.birthYear;
+  withdraw(val) {
+    this.deposit(-val);
   }
-  set fullName(name) {
-    if (name.includes(' ')) this._fullName = name;
-    else alert('We need full name!');
+  // only internal method for class
+  requestLoan(val) {
+    if (this.#approvedLoan(val)) {
+      this.deposit(val);
+    }
   }
-  get fullName() {
-    return this._fullName;
-  }
-  static hey() {
-    console.log('Hello world ✋!');
+  //private methods
+  #approvedLoan(val) {
+    return true;
   }
 }
-//child
-class Student extends Person {
-  constructor(fullName, birthYear, course) {
-    // this comes always first:
-    super(fullName, birthYear); //arguments of parent constructor
-    this.course = course;
-  }
-  introduce() {
-    console.log(`Hi, I am ${this.fullName} and I study ${this.course}`);
-  }
-  calcAge() {
-    console.log(`I am ${this.age}, however I fill like ${this.age - 5}`);
-  }
-}
-const martha = new Student('Martha Jones', 2002, 'Computer science');
-martha.introduce();
-martha.fullName = 'Martha Jones Smith';
-console.log(martha.fullName);
-martha.calcAge();
-
-//inheritance Object.create
-
-const PersonProto = {
-  calcAge() {
-    console.log(new Date().getFullYear() - this.birthYear);
-  },
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
-const StudentProto = Object.create(PersonProto);
-StudentProto.init = function (firstName, birthYear, course) {
-  PersonProto.init.call(this, firstName, birthYear);
-  this.course = course;
-};
-const jay = Object.create(StudentProto);
-jay.init('Jay', 1986, 'Mathematics');
-console.log(jay);
-jay.calcAge();
-jay.introduce = function () {
-  console.log(`Hi, I am ${this.firstName} and I study ${this.course}`);
-};
-jay.introduce();
+const dom = new Account('Dominik', 'PLN', 1111);
+console.log(dom);
+dom.deposit(2000);
+dom.withdraw(200);
+dom.requestLoan(200);
+console.log(dom.getMovements());
+// console.log(dom.#approvedLoan(200));
+console.log(dom._pin);
+// console.log(dom.#movements);
+// console.log(dom.pin);
