@@ -355,3 +355,28 @@ martha.introduce();
 martha.fullName = 'Martha Jones Smith';
 console.log(martha.fullName);
 martha.calcAge();
+
+//inheritance Object.create
+
+const PersonProto = {
+  calcAge() {
+    console.log(new Date().getFullYear() - this.birthYear);
+  },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+const jay = Object.create(StudentProto);
+jay.init('Jay', 1986, 'Mathematics');
+console.log(jay);
+jay.calcAge();
+jay.introduce = function () {
+  console.log(`Hi, I am ${this.firstName} and I study ${this.course}`);
+};
+jay.introduce();
