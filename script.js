@@ -404,19 +404,23 @@ class Account {
   }
   deposit(val) {
     this.#movements.push(val);
+    return this; // chaining methods
   }
   withdraw(val) {
     this.deposit(-val);
+    return this;
   }
   // only internal method for class
   requestLoan(val) {
     if (this.#approvedLoan(val)) {
       this.deposit(val);
     }
+    return this;
   }
   //private methods
   #approvedLoan(val) {
     return true;
+    return this;
   }
 }
 const dom = new Account('Dominik', 'PLN', 1111);
@@ -429,3 +433,5 @@ console.log(dom.getMovements());
 console.log(dom._pin);
 // console.log(dom.#movements);
 // console.log(dom.pin);
+dom.deposit(3000).withdraw(200).requestLoan(3000).withdraw(2000);
+console.log(dom.getMovements()); // Methods chaining
